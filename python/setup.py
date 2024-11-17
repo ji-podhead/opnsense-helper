@@ -8,7 +8,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='opnsense_helper',
-    version='0.1.25',    
+    version='0.1.26',    
     description='backend api for opnsense. assign lan interfaces, create vlans, vlan-interfaces and setup dhcp in a single script.',
     long_description=long_description,
     long_description_content_type='text/markdown',

@@ -27,12 +27,15 @@
 - uses the opnsense backend via shh 
 - configctl and pluginctl commands
 - around 80 opnsense scripts you can call
+  - automatically created docs provided!
 - automatically configures your Vlan and Phy Interfaces after applying configuration
 
 ---
 
 - ***[pypy project](https://pypi.org/project/opnsense-helper)*** 
 - ***[Api Docs](https://ji-podhead.github.io/opnsense-helper/.docs/_build/html/index.html)***
+- ***[opnsense-scripts-autodocs](https://ji-podhead.github.io/opnsense-scripts-autodocs/.docs/_build/html/index.html#)***
+  - ***[repo](https://github.com/ji-podhead/opnsense-scripts-autodocs)***
 
 ---
 

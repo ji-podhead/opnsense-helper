@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../python'))  # Source code dir relative to this file
+sys.path.insert(0, os.path.abspath('../'))  # Source code dir relative to this file
 
 extensions = [
     'sphinx.ext.autodoc',  # Core library for html generation from docstrings
@@ -34,7 +34,7 @@ html_theme_options = {
 project = 'opnsense_helper'
 copyright = '2024, ji-podhead'
 author = 'ji-podhead'
-release = '0.1.20'
+release = '0.1.26'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usa<ge/configuration.html#general-configuration

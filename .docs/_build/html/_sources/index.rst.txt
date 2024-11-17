@@ -28,3 +28,10 @@ Opnsense-Helper
    :caption: Python API-Dokumentation
    
    python_package.rst
+
+.. toctree::
+   :maxdepth: 20
+   :caption: opnsense-scripts-autodocs
+   
+   opnsense-scripts.rst
+

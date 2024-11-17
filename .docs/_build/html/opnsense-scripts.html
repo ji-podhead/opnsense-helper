@@ -1,0 +1,2979 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>auth &mdash; opnsense_helper 0.1.20 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=17aaaefc"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Opnsense-Helper" href="python_package.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            opnsense_helper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">about opnsense-helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#install">install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#usage">usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html#motivation">motivation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API-Dokumentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html">Opnsense-Helper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#coonfig-manager">coonfig_manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#commands">commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_package.html#scripts">scripts</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">opnsense-scripts-autodocs</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">auth</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-add-user-php">script add_user.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-list-group-members-php">script list_group_members.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.dhcp.cleanup_leases4">dhcp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-cleanup-leases4-php">script cleanup_leases4.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-cleanup-leases6-php">script cleanup_leases6.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-dnsmasq-watcher-py">script dnsmasq_watcher.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-get-kea-leases-py">script get_kea_leases.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-prefixes-sh">script prefixes.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-0">script prefixes.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.dns.query_dns">dns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-query-dns-py">script query_dns.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.filter.kill_states">filter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-kill-states-py">script kill_states.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-list-states-py">script list_states.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-rollback-cancle-php">script rollback_cancle.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-rollback-timer-php">script rollback_timer.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-update-bogons-sh">script update_bogons.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.firmware.changelog">firmware</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-changelog-sh">script changelog.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-env-init-sh">script env_init.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-connection-sh">script connection.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-details-sh">script details.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-health-sh">script health.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-hostnames-sh">script hostnames.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-install-sh">script install.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-latest-php">script latest.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-firmware-runner-sh">script firmware_runner.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-license-sh">script license.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-lock-sh">script lock.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-plugin-sh">script plugin.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-product-php">script product.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-query-sh">script query.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-read-sh">script read.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reboot-sh">script reboot.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-register-php">script register.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reinstall-sh">script reinstall.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-remove-sh">script remove.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-resync-sh">script resync.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-running-sh">script running.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-security-sh">script security.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-sync-sh">script sync.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-unlock-sh">script unlock.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-update-sh">script update.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-upgrade-sh">script upgrade.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.repos.FreeBSD">repos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-freebsd-php">script FreeBSD.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-opnsense-php">script OPNsense.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.health.updaterrd">health</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-updaterrd-php">script updaterrd.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#definitions">definitions</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.interfaces.carp_global_status">interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-carp-global-status-php">script carp_global_status.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-carp-set-status-php">script carp_set_status.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-ifctl-sh">script ifctl.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reconfigure-gifs-php">script reconfigure_gifs.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reconfigure-gres-php">script reconfigure_gres.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reconfigure-laggs-php">script reconfigure_laggs.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reconfigure-neighbors-php">script reconfigure_neighbors.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reconfigure-vips-php">script reconfigure_vips.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-reconfigure-vlans-php">script reconfigure_vlans.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-rtsold-resolvconf-sh">script rtsold_resolvconf.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-traffic-stats-php">script traffic_stats.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.ipsec.get_legacy_vti">ipsec</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-get-legacy-vti-php">script get_legacy_vti.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.netflow.flush_all">netflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-flush-all-sh">script flush_all.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#openssh">openssh</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.openvpn.client_connect">openvpn</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-client-connect-php">script client_connect.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-client-disconnect-sh">script client_disconnect.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-ovpn-service-control-php">script ovpn_service_control.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-tls-verify-php">script tls_verify.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-user-pass-verify-php">script user_pass_verify.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.routes.del_route">routes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-del-route-py">script del_route.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-gateway-status-php">script gateway_status.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-gateway-watcher-php">script gateway_watcher.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-gateways-php">script gateways.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#shaper">shaper</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.shell.banner">shell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-banner-php">script banner.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-defaults-php">script defaults.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-firmware-sh">script firmware.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-halt-php">script halt.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-password-php">script password.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-ping-php">script ping.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-netboot-php">script netboot.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-restore-sh">script restore.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-script-setaddr-php">script script setaddr.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-setports-php">script setports.php</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.suricata.listRuleMetadata">suricata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-listrulemetadata-py">script listRuleMetadata.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-suricata-setup-sh">script suricata_setup.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.syslog.clearlog">syslog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-clearlog-php">script clearlog.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-list-applications-php">script list_applications.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-querylog-py">script queryLog.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-streamlog-py">script streamLog.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.system.cpu">system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-cpu-py">script cpu.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-nameservers-php">script nameservers.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-remote-backup-php">script remote_backup.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-ssl-ciphers-py">script ssl_ciphers.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-status-php">script status.php</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-sysctl-py">script sysctl.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-temperature-sh">script temperature.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-python.autodocs.unbound.cache">unbound</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#script-cache-sh">script cache.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-logger-py">script logger.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-restore-db-py">script restore_db.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-start-sh">script start.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-stats-py">script stats.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-wrapper-py">script wrapper.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#wireguard">Wireguard</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">opnsense_helper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">auth</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/opnsense-scripts.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="toctree-wrapper compound">
+</div>
+<section id="module-python.autodocs.auth.add_user">
+<span id="auth"></span><h1>auth<a class="headerlink" href="#module-python.autodocs.auth.add_user" title="Link to this heading"></a></h1>
+<section id="script-add-user-php">
+<h2>script add_user.php<a class="headerlink" href="#script-add-user-php" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><em>Params</em>   </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>$argv<span class="classifier">array</span></dt><dd><ul>
+<li><p>-h show this help text and exit”</p></li>
+<li><p>-u [required] username”</p></li>
+<li><p>-o origin (default=automation)”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>str</dt><dd><ul>
+<li><p>echos the status of the operation</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-list-group-members-php">
+<span id="module-python.autodocs.auth.list_group_members"></span><h2>script list_group_members.php<a class="headerlink" href="#script-list-group-members-php" title="Link to this heading"></a></h2>
+<p>Retrieves a list of system groups and their corresponding members.</p>
+<dl>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>A JSON-encoded array containing system groups as keys and their details as values, including group name and member list.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.dhcp.cleanup_leases4">
+<span id="dhcp"></span><h1>dhcp<a class="headerlink" href="#module-python.autodocs.dhcp.cleanup_leases4" title="Link to this heading"></a></h1>
+<section id="script-cleanup-leases4-php">
+<h2>script cleanup_leases4.php<a class="headerlink" href="#script-cleanup-leases4-php" title="Link to this heading"></a></h2>
+<p>Cleans up DHCP leases by removing expired or unwanted leases.</p>
+<p>This script reads the DHCP lease file, removes leases that match the specified criteria, and writes the updated lease file.</p>
+<p><em>Params</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>$argsv<span class="classifier">array  </span></dt><dd><ul>
+<li><p>-h : Show help text and exit.</p></li>
+<li><p>-m : Remove static MAC addresses.</p></li>
+<li><p>-s : Restart the DHCP service (required when the service is active).</p></li>
+<li><p>-d=xxx : Remove the specified IP address.</p></li>
+<li><p>-f=dhcpd.leases : Specify the DHCP lease file (default: /var/dhcpd/var/db/dhcpd.leases).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>dhcp_lease_file : string - The path to the DHCP lease file (default: /var/dhcpd/var/db/dhcpd.leases).</p></li>
+<li><p>opts : array - An array of command-line options.</p></li>
+<li><p>addresses : array - An array of IP addresses to remove.</p></li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>A JSON-encoded array with the number of removed leases.</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Options</em></p>
+</section>
+<section id="script-cleanup-leases6-php">
+<span id="module-python.autodocs.dhcp.cleanup_leases6"></span><h2>script cleanup_leases6.php<a class="headerlink" href="#script-cleanup-leases6-php" title="Link to this heading"></a></h2>
+<p>Cleans up DHCPv6 leases by removing expired or unwanted leases.</p>
+<p>This script reads the DHCPv6 lease file, removes leases that match the specified criteria, and writes the updated lease file.</p>
+<p><em>Params</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>argsv<span class="classifier">array</span></dt><dd><ul>
+<li><p>-h : Show help text and exit.</p></li>
+<li><p>-s : Restart the DHCPv6 service (required when the service is active).</p></li>
+<li><p>-d=xxx : Remove the specified IPv6 address.</p></li>
+<li><p>-f=dhcpd6.leases : Specify the DHCPv6 lease file (default: /var/dhcpd/var/db/dhcpd6.leases).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>dhcp_lease_file : string - The path to the DHCPv6 lease file (default: /var/dhcpd/var/db/dhcpd6.leases).</p></li>
+<li><p>opts : array - An array of command-line options.</p></li>
+<li><p>ip_to_remove : string - The IPv6 address to remove.</p></li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>A JSON-encoded array with the number of removed leases.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-dnsmasq-watcher-py">
+<span id="module-python.autodocs.dhcp.dnsmasq_watcher"></span><h2>script dnsmasq_watcher.py<a class="headerlink" href="#script-dnsmasq-watcher-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>domain<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: default domain to use</p></li>
+<li><p>options : [’–domain’]</p></li>
+<li><p>default : local</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>pid<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: pid file location</p></li>
+<li><p>options : [’–pid’]</p></li>
+<li><p>default : /var/run/dnsmasq_dhcpd.pid</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>servicepid<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: dnsmasq pid file location</p></li>
+<li><p>options : [’–servicepid’]</p></li>
+<li><p>default : /var/run/dnsmasq.pid</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>source<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: source leases file</p></li>
+<li><p>options : [’–source’]</p></li>
+<li><p>default : /var/dhcpd/var/db/dhcpd.leases</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>target<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: target config file</p></li>
+<li><p>options : [’–target’]</p></li>
+<li><p>default : /var/etc/dnsmasq-leases</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-get-kea-leases-py">
+<span id="module-python.autodocs.dhcp.get_kea_leases"></span><h2>script get_kea_leases.py<a class="headerlink" href="#script-get-kea-leases-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>proto<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: protocol to fetch (inet, inet6)</p></li>
+<li><p>options : [’–proto’]</p></li>
+<li><p>default : inet</p></li>
+<li><p>choices : [‘inet’]</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-prefixes-sh">
+<span id="module-python.autodocs.dhcp.prefixes"></span><h2>script prefixes.sh<a class="headerlink" href="#script-prefixes-sh" title="Link to this heading"></a></h2>
+<p>Watches for changes in the DHCPv6 leases file and updates the configuration.</p>
+<p>It uses the <cite>md5</cite> command to calculate the checksum of the leases file.
+If the checksum changes, it updates the DHCPv6 configuration using the <cite>configctl</cite> command.
+Thescript runs indefinitely and checks for changes at the specified interval.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">int</span></dt><dd><ul>
+<li><p>INTERVAL: The interval in seconds to check for changes (default: 20).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>md5</cite>, <cite>configctl</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/var/dhcpd/var/db/dhcpd6.leases</cite> file to store the DHCPv6 leases.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="module-0">
+<span id="id1"></span><h2>script prefixes.sh<a class="headerlink" href="#module-0" title="Link to this heading"></a></h2>
+<p>Watches for changes in the DHCPv6 leases file and updates the configuration.</p>
+<p>It uses the <cite>md5</cite> command to calculate the checksum of the leases file.
+If the checksum changes, it updates the DHCPv6 configuration using the <cite>configctl</cite> command.
+Thescript runs indefinitely and checks for changes at the specified interval.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">int</span></dt><dd><ul>
+<li><p>INTERVAL: The interval in seconds to check for changes (default: 20).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>md5</cite>, <cite>configctl</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/var/dhcpd/var/db/dhcpd6.leases</cite> file to store the DHCPv6 leases.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.dns.query_dns">
+<span id="dns"></span><h1>dns<a class="headerlink" href="#module-python.autodocs.dns.query_dns" title="Link to this heading"></a></h1>
+<section id="script-query-dns-py">
+<h2>script query_dns.py<a class="headerlink" href="#script-query-dns-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>domain<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: domain name to query</p></li>
+<li><p>options : []</p></li>
+<li><p>required : True</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>types<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: list of types to query (when querying hostnames)</p></li>
+<li><p>options : [’–types’]</p></li>
+<li><p>default : A,AAAA,MX,TXT</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>server<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: server to query</p></li>
+<li><p>options : [’–server’]</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.filter.kill_states">
+<span id="filter"></span><h1>filter<a class="headerlink" href="#module-python.autodocs.filter.kill_states" title="Link to this heading"></a></h1>
+<section id="script-kill-states-py">
+<h2>script kill_states.py<a class="headerlink" href="#script-kill-states-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>filter<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: filter results</p></li>
+<li><p>options : [’–filter’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>label<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: label / rule id</p></li>
+<li><p>options : [’–label’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-list-states-py">
+<span id="module-python.autodocs.filter.list_states"></span><h2>script list_states.py<a class="headerlink" href="#script-list-states-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>filter<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: filter results</p></li>
+<li><p>options : [’–filter’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>label<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: label / rule id</p></li>
+<li><p>options : [’–label’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>limit<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: limit number of results</p></li>
+<li><p>options : [’–limit’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>offset<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: offset results</p></li>
+<li><p>options : [’–offset’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>sort_by<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: sort by (field asc|desc)</p></li>
+<li><p>options : [’–sort_by’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-rollback-cancle-php">
+<span id="module-python.autodocs.filter.rollback_cancel"></span><h2>script rollback_cancle.php<a class="headerlink" href="#script-rollback-cancle-php" title="Link to this heading"></a></h2>
+<p>This script is used to cancel a rollback operation by deleting the corresponding lock file.</p>
+<p>The script assumes that the lock file is in the format “/tmp/filter_&lt;revision&gt;.lock”.</p>
+<dl class="simple">
+<dt><em>Params</em>   </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argsv[0]<span class="classifier">int</span></dt><dd><ul>
+<li><p>(optional): The revision number to cancel</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Checks if a revision number is provided as a command-line argument</p></li>
+<li><p>If a revision number is provided, checks if a lock file exists for that revision</p></li>
+<li><p>If the lock file exists, deletes it and exits with a success code (0)</p></li>
+<li><p>If no revision number is provided or the lock file does not exist, exits with a failure code (1)</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Outputs</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Exit code: 0 (success) or 1 (failure)</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-rollback-timer-php">
+<span id="module-python.autodocs.filter.rollback_timer"></span><h2>script rollback_timer.php<a class="headerlink" href="#script-rollback-timer-php" title="Link to this heading"></a></h2>
+<p>A script to manage the rollback timer for firewall filter changes.</p>
+<p>It uses the OPNsenseFirewallFilter class to manage firewall filter changes.
+It is used to manage the rollback timer for firewall filter changes.</p>
+<dl class="simple">
+<dt><em>Params</em>   </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argsv[0]<span class="classifier">int</span></dt><dd><ul>
+<li><p>(optional): The revision number to cancel</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>OPNsenseFirewallFilter::rollback($revision): Rolls back to the specified revision</p></li>
+<li><p>OPNsenseCoreBackend::configdRun($command): Runs a command on the backend</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Checks the command-line arguments for the revision number</p></li>
+<li><p>Creates a lock file for the revision</p></li>
+<li><p>Waits for 60 seconds for the API to callback</p></li>
+<li><p>If the lock file is deleted, exits with success</p></li>
+<li><p>If the lock file still exists, rolls back to the specified revision</p></li>
+<li><p>Reloads the firewall filter configuration if the rollback is successful</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-update-bogons-sh">
+<span id="module-python.autodocs.filter.update_bogons"></span><h2>script update_bogons.sh<a class="headerlink" href="#script-update-bogons-sh" title="Link to this heading"></a></h2>
+<p>Updates the bogons files for IPv4 and IPv6.</p>
+<p>It downloads the latest bogons files from the OPNsense repository, verifies their integrity, and extracts them to a temporary directory.
+Thescript then updates the bogons tables in the pf firewall configuration.
+If the update is successful, thescript logs a success message.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>COMMAND: The command to execute (e.g. “cron”).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-update</cite>, <cite>fetch</cite>, <cite>tar</cite>, <cite>pfctl</cite>, <cite>logger</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/etc</cite> directory to store the bogons files.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.firmware.changelog">
+<span id="firmware"></span><h1>firmware<a class="headerlink" href="#module-python.autodocs.firmware.changelog" title="Link to this heading"></a></h1>
+<section id="script-changelog-sh">
+<h2>script changelog.sh<a class="headerlink" href="#script-changelog-sh" title="Link to this heading"></a></h2>
+<p>Executes the main functionality of the changelog management program.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>Command to execute (fetch, cron, remove, list, url, html, text)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>${2}<span class="classifier">str (optional)</span></dt><dd><ul>
+<li><p>Version number (required for html and text commands)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>int</dt><dd><ul>
+<li><p>Exit status of thescript (0 for success, non-zero for failure)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Commands</em></dt><dd><ul class="simple">
+<li><p>fetch : Fetches the latest changelog from the remote repository.</p></li>
+<li><p>cron : Fetches the latest changelog from the remote repository, pausing for at least 10 minutes spread out over the next 12 hours.</p></li>
+<li><p>remove : Removes all changelog files from the destination directory.</p></li>
+<li><p>list : Lists the contents of the index.json file.</p></li>
+<li><p>url : Prints the URL of the remote changelog repository.</p></li>
+<li><p>html : Prints the HTML changelog for the specified version.</p></li>
+<li><p>text : Prints the text changelog for the specified version.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-env-init-sh">
+<span id="module-python.autodocs.firmware.config"></span><h2>script env_init.sh<a class="headerlink" href="#script-env-init-sh" title="Link to this heading"></a></h2>
+<p>Initializes the environment for OPNsense firmware operations.</p>
+<p>It checks if the OPNsense update is available and if so, sets environment
+variables to disable TLS versions below 1.3, refreshes CRL files, and tells
+libfetch to verify from the trust store.</p>
+</section>
+<section id="script-connection-sh">
+<span id="module-python.autodocs.firmware.connection"></span><h2>script connection.sh<a class="headerlink" href="#script-connection-sh" title="Link to this heading"></a></h2>
+<p>Checks connectivity to OPNsense servers and verifies server certificates.</p>
+<p>It uses the <cite>opnsense-update</cite> commands to determine the URLs of the servers,
+and then checks connectivity to these servers over IPv4 and IPv6.
+Finally, it verifies the server certificates.</p>
+</section>
+<section id="script-details-sh">
+<span id="module-python.autodocs.firmware.details"></span><h2>script details.sh<a class="headerlink" href="#script-details-sh" title="Link to this heading"></a></h2>
+<p>Queries package information.</p>
+<p>It takes a package name as an argument and uses the <cite>pkg rquery</cite> command to retrieve information about the package.
+Thescript outputs the package name, version, and maintainer.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>The package to query.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-health-sh">
+<span id="module-python.autodocs.firmware.health"></span><h2>script health.sh<a class="headerlink" href="#script-health-sh" title="Link to this heading"></a></h2>
+<p>Performs a health audit on the system.</p>
+<p>It checks the root file system, kernel, base system, repositories, plugins,
+locked packages, and package dependencies.
+It also checks for missing or altered package files.
+The audit results are logged to a file.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}: str</dt><dd><ul>
+<li><p>Optional command to specify which audit to perform.</p></li>
+<li><p>Possible values: kernel, base, repos, plugins, locked, packages, core</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p><em>Functions</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>set_check: Checks the version and consistency of a package.</p></li>
+<li><p>core_check: Checks the consistency of the core packages.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-hostnames-sh">
+<span id="module-python.autodocs.firmware.hostnames"></span><h2>script hostnames.sh<a class="headerlink" href="#script-hostnames-sh" title="Link to this heading"></a></h2>
+<p>Retrieves the hosts of the repositories configured on the system.</p>
+<p>It uses the <cite>opnsense-verify</cite> command to get the list of repositories,
+and then parses the repository configuration files to extract the URLs.
+It filters out non-HTTPS URLs and extracts the host from the remaining URLs.
+The unique hosts are then printed to the console.</p>
+<dl class="simple">
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><p>A list of unique hosts of the repositories.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-install-sh">
+<span id="module-python.autodocs.firmware.install"></span><h2>script install.sh<a class="headerlink" href="#script-install-sh" title="Link to this heading"></a></h2>
+<p>Installs a package on the system.
+It checks if the package is a core package and if so, it checks if the core package is up-to-date.
+If the core package is not up-to-date, it exits and displays an error message.
+Otherwise, it installs the package using the <cite>pkg</cite> command and logs the output to a lockfile.
+After installation, it runs the <cite>register.php`script to register the package and then runs `pkg autoremove</cite> to remove any unnecessary packages.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>Name of the package to install.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em>  - Thisscript uses the <cite>opnsense-version</cite> command to get the current version of the system.</dt><dd><ul class="simple">
+<li><p>Thisscript uses the <cite>pkg</cite> command to install and manage packages.</p></li>
+<li><p>Thisscript uses the <a href="#id2"><span class="problematic" id="id3">`</span></a>register.php`script to register the package.</p></li>
+<li><p>Thisscript logs all output to a lockfile.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-latest-php">
+<span id="module-python.autodocs.firmware.latest"></span><h2>script latest.php<a class="headerlink" href="#script-latest-php" title="Link to this heading"></a></h2>
+<p>Retrieves the latest stable version of OPNsense by parsing the changelog file.</p>
+<dl>
+<dt><em>Params</em>- arsv[1]<span class="classifier">str</span></dt><dd><ul class="simple">
+<li><p>Path to the changelog file (default: /usr/local/opnsense/changelog/index.json)</p></li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The latest stable version of OPNsense, or the current version if unknown.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<section id="script-firmware-runner-sh">
+<span id="module-python.autodocs.firmware.launcher"></span><h2>script firmware_runner.sh<a class="headerlink" href="#script-firmware-runner-sh" title="Link to this heading"></a></h2>
+<p>Runs a firmwarescript.</p>
+<p>It supports various options, such as specifying ascript, setting a random delay, and enabling verbose mode.
+Thescript uses a lock file to ensure that only onescript is run at a time.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>r: int</dt><dd><ul>
+<li><p>Optional: Sets a random delay before running thescript.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>s: str</dt><dd><ul>
+<li><p>Optional: Specifies thescript to run.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>u: bool</dt><dd><ul>
+<li><p>Optional: Runs thescript without a lock file.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>V: bool</dt><dd><ul>
+<li><p>Optional: Enables verbose mode.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>int</dt><dd><ul>
+<li><p>The return value of the runscript.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em>  - Thisscript uses the <cite>flock</cite> function to manage the lock file.</dt><dd><ul class="simple">
+<li><p>Thescript uses the <cite>jot</cite> function to generate a random delay.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-license-sh">
+<span id="module-python.autodocs.firmware.license"></span><h2>script license.sh<a class="headerlink" href="#script-license-sh" title="Link to this heading"></a></h2>
+<p>Displays the license information for a package.</p>
+<p>It uses the <cite>pkg</cite> command to query the package database and retrieve the license information.
+Thescript then displays the license text for each license found.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>The name of the package to display the license information for.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the license files are stored in the <cite>${LICENSEDIR}</cite> directory.</p></li>
+<li><p>Thescript uses the <cite>${PKG}</cite> command to query the package database.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-lock-sh">
+<span id="module-python.autodocs.firmware.lock"></span><h2>script lock.sh<a class="headerlink" href="#script-lock-sh" title="Link to this heading"></a></h2>
+<p>Locks a package to prevent updates.</p>
+<p>It uses the <cite>opnsense-update</cite> command to lock the base or kernel set, or the <cite>pkg</cite> command to lock a specific package.
+Thescript logs its actions to a lock file.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>The name of the package to lock.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the lock file is stored in the <cite>${LOCKFILE}</cite> directory.</p></li>
+<li><p>Thescript uses the <cite>opnsense-version</cite> command to retrieve the current version of the system.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-plugin-sh">
+<span id="module-python.autodocs.firmware.plugin"></span><h2>script plugin.sh<a class="headerlink" href="#script-plugin-sh" title="Link to this heading"></a></h2>
+<p>Checks if a plugin is installed.</p>
+<p>It uses the <cite>opnsense-version</cite> command to check if the plugin is installed, either in stable or development version.
+Thescript returns 0 if the plugin is not installed, and 1 if it is installed.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str </span></dt><dd><ul>
+<li><p>PLUGIN: The name of the plugin to check.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>int</dt><dd><ul>
+<li><p>0 if the plugin is not installed, 1 if it is installed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the <cite>opnsense-version</cite> command is available.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-product-php">
+<span id="module-python.autodocs.firmware.product"></span><h2>script product.php<a class="headerlink" href="#script-product-php" title="Link to this heading"></a></h2>
+<p>A script to retrieve and display product information.</p>
+<p>This script uses the <cite>json_decode</cite>, <cite>file_get_contents</cite>, <cite>shell_safe</cite>, <cite>date</cite>, <cite>filemtime</cite>, <cite>explode</cite>, <cite>sort</cite>, <cite>implode</cite>, and <cite>json_encode</cite> functions to retrieve and display the product information.
+The script assumes that the product metadata file and license file are in the correct format and location.</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>$metafile: The path to the product metadata file</p></li>
+<li><p>$licensefile: The path to the product license file</p></li>
+<li><p>$ret: The array to store the product information</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>json_decode(string $json, bool $assoc): Decodes a JSON string into a PHP array</p></li>
+<li><p>file_get_contents(string $filename): Reads the contents of a file</p></li>
+<li><p>shell_safe(string $command): Executes a shell command and returns the output</p></li>
+<li><p>date(string $format, int $timestamp): Formats a timestamp into a human-readable date string</p></li>
+<li><p>filemtime(string $filename): Returns the last modification time of a file</p></li>
+<li><p>explode(string $delimiter, string $string): Splits a string into an array using a delimiter</p></li>
+<li><p>sort(array &amp;$array): Sorts an array in ascending order</p></li>
+<li><p>implode(string $delimiter, array $array): Joins an array into a string using a delimiter</p></li>
+<li><p>json_encode(array $array, int $flags): Encodes a PHP array into a JSON string</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Reads the product metadata file and decodes the JSON contents into an array</p></li>
+<li><p>Retrieves the latest product version, mirror URL, and timestamp</p></li>
+<li><p>Retrieves the list of repositories and sorts them in ascending order</p></li>
+<li><p>Checks if there are any pending updates and retrieves the update log</p></li>
+<li><p>Retrieves the license information from the license file (if available)</p></li>
+<li><p>Sorts the product information array in ascending order</p></li>
+<li><p>Encodes the product information array into a JSON string and outputs it</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Outputs</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A JSON string containing the product information</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-query-sh">
+<span id="module-python.autodocs.firmware.query"></span><h2>script query.sh<a class="headerlink" href="#script-query-sh" title="Link to this heading"></a></h2>
+<p>Retrieves version information for OPNsense.</p>
+<p>It uses the <cite>opnsense-version</cite> command to retrieve version information for the base and kernel sets.
+It also uses the <cite>pkg</cite> command to retrieve package information.
+Thescript supports three modes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>local: Retrieves version information for the local OPNsense installation.</p></li>
+<li><p>remote: Retrieves version information from a remote repository.</p></li>
+<li><p>tiers: Retrieves product tier annotations from a remote repository.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>MODE: The mode to retrieve version information (local, remote, tiers).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><p>str
+- The version information in a formatted string.</p></li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-version</cite>, <cite>pkg</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-read-sh">
+<span id="module-python.autodocs.firmware.read"></span><h2>script read.sh<a class="headerlink" href="#script-read-sh" title="Link to this heading"></a></h2>
+<p>Retrieves the lock file for a package.</p>
+<p>It checks if the lock file exists and prints its content.
+The lock file is assumed to be located at the <cite>${LOCKFILE}</cite> directory.</p>
+<dl class="simple">
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><p>str
+- The lock file content.</p></li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>cat</cite>, <cite>sed</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-reboot-sh">
+<span id="module-python.autodocs.firmware.reboot"></span><h2>script reboot.sh<a class="headerlink" href="#script-reboot-sh" title="Link to this heading"></a></h2>
+<p>Provides a hint to the console to reboot the system.</p>
+<p>It checks if an update to the OPNsense core package is available and if the system needs to be rebooted.
+Thescript uses the <cite>pkg</cite> command to query the package database and the <cite>opnsense-update</cite> command to check for updates.
+If an update is available, thescript prints the next version number and exits with a status code of 0.
+If no update is available, thescript exits with a status code of 1.</p>
+<dl class="simple">
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><p>int
+- 0 if a reboot is not necessary, 1 if a reboot is necessary.</p></li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>pkg</cite>, <cite>opnsense-update</cite>, <cite>pluginctl</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-register-php">
+<span id="module-python.autodocs.firmware.register"></span><h2>script register.php<a class="headerlink" href="#script-register-php" title="Link to this heading"></a></h2>
+<p>A script to manage plugin registration.</p>
+<p>This script uses the Config class to manage the plugin configuration.</p>
+<p>The script assumes that the plugin metadata is stored in JSON files on disk.
+This script is used to manage plugin registration and updates.</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>$action (optional): The action to perform (install, remove, sync, resync)</p></li>
+<li><p>$name (optional): The name of the plugin to install or remove</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>plugins_config_get($config): Returns the current plugin configuration</p></li>
+<li><p>plugins_config_set($config, $plugins): Sets the plugin configuration</p></li>
+<li><p>plugins_disk_found($name): Checks if a plugin is found on disk</p></li>
+<li><p>plugins_disk_get(): Returns a list of plugins found on disk</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Checks the command-line arguments for the action and plugin name</p></li>
+<li><p>Initializes the plugin configuration and disk plugins</p></li>
+<li><p>Performs the specified action (install, remove, sync, resync)</p></li>
+<li><p>Updates the plugin configuration if necessary</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-reinstall-sh">
+<span id="module-python.autodocs.firmware.reinstall"></span><h2>script reinstall.sh<a class="headerlink" href="#script-reinstall-sh" title="Link to this heading"></a></h2>
+<p>Reinstalls a package on the OPNsense system.</p>
+<p>It checks if the package is the base or kernel package and performs the necessary actions.
+If the package is a plugin, it reverts the plugin to its original state and reinstalls it.
+Thescript uses the <cite>opnsense-update</cite> command to update the package and the <cite>opnsense-revert</cite> command to revert the plugin.
+If a reboot is necessary, thescript initiates a reboot after a short delay.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>PACKAGE: The name of the package to reinstall (base, kernel, or a plugin name).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-update</cite>, <cite>opnsense-revert</cite>, <cite>pkg</cite>, <cite>rc.reboot</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-remove-sh">
+<span id="module-python.autodocs.firmware.remove"></span><h2>script remove.sh<a class="headerlink" href="#script-remove-sh" title="Link to this heading"></a></h2>
+<p>Removes a package from the OPNsense system.</p>
+<p>It uses the <cite>pkg</cite> command to remove the package and the <cite>register.php`script to update the package registration.
+Thescript also runs the `pkg autoremove</cite> command to remove any unnecessary dependencies.
+Thescript logs its actions to the <cite>${LOCKFILE}</cite> file.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>PACKAGE: The name of the package to remove.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>pkg</cite>, <cite>register.php</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-resync-sh">
+<span id="module-python.autodocs.firmware.resync"></span><h2>script resync.sh<a class="headerlink" href="#script-resync-sh" title="Link to this heading"></a></h2>
+<p>Resynchronizes the OPNsense system with the latest configuration.</p>
+<p>It uses the <cite>register.php`script to perform the resynchronization and logs its actions to the `${LOCKFILE}</cite> file.</p>
+<dl class="simple">
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-version</cite>, <cite>register.php</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+<li><p>Thescript clears the <cite>${LOCKFILE}</cite> file before starting the resynchronization.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-running-sh">
+<span id="module-python.autodocs.firmware.running"></span><h2>script running.sh<a class="headerlink" href="#script-running-sh" title="Link to this heading"></a></h2>
+<p>Checks if the OPNsense system is currently locked for updates.</p>
+<p>It uses the <cite>flock</cite> command to check if the lock file is available.</p>
+<dl class="simple">
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><p>“ready” if the system is not locked</p></li>
+<li><p>“busy” if the system is locked</p></li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>flock</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+<li><p>Thescript uses the <cite>${LOCKFILE}</cite> file to store the lock information.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-security-sh">
+<span id="module-python.autodocs.firmware.security"></span><h2>script security.sh<a class="headerlink" href="#script-security-sh" title="Link to this heading"></a></h2>
+<p>Performs a security audit on the OPNsense system.</p>
+<p>It uses the <cite>pkg</cite> command to run the audit and logs its actions to the <cite>${LOCKFILE}</cite> file.</p>
+<dl class="simple">
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>pkg</cite>, <cite>opnsense-version</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+<li><p>Thescript clears the <cite>${LOCKFILE}</cite> file before starting the audit.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-sync-sh">
+<span id="module-python.autodocs.firmware.sync"></span><h2>script sync.sh<a class="headerlink" href="#script-sync-sh" title="Link to this heading"></a></h2>
+<p>Synchronizes the OPNsense system with the latest configuration.</p>
+<p>It uses the <cite>sync.subr.sh`script to perform the synchronization and logs its actions to the `${LOCKFILE}</cite> file.</p>
+<dl class="simple">
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-version</cite>, <cite>sync.subr.sh</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-unlock-sh">
+<span id="module-python.autodocs.firmware.unlock"></span><h2>script unlock.sh<a class="headerlink" href="#script-unlock-sh" title="Link to this heading"></a></h2>
+<p>Unlocks a package or set on the OPNsense system.</p>
+<p>It uses the <cite>opnsense-update</cite> command to unlock the base or kernel sets, and the <cite>pkg</cite> command to unlock other packages.
+Thescript logs its actions to the <cite>${LOCKFILE}</cite> file.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>PACKAGE: The name of the package or set to unlock.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-update</cite>, <cite>pkg</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-update-sh">
+<span id="module-python.autodocs.firmware.update"></span><h2>script update.sh<a class="headerlink" href="#script-update-sh" title="Link to this heading"></a></h2>
+<p>Updates the OPNsense system to the latest version.</p>
+<p>It uses the <cite>opnsense-update</cite> command to perform the update and the <cite>rc.restart_webgui</cite> command to restart the web server.
+Thescript also uses the <cite>tee</cite> command to log the output to the <cite>${LOCKFILE}</cite> file.
+If the update is successful, thescript initiates a reboot after a short delay if necessary.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>{1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>CMD: The command to execute (e.g. “sync”).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-update</cite>, <cite>rc.restart_webgui</cite>, <cite>tee</cite>, <cite>rc.reboot</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-upgrade-sh">
+<span id="module-python.autodocs.firmware.upgrade"></span><h2>script upgrade.sh<a class="headerlink" href="#script-upgrade-sh" title="Link to this heading"></a></h2>
+<p>Upgrades the OPNsense system to the latest version.</p>
+<p>It uses the <cite>opnsense-update</cite> command to perform the upgrade and the <cite>rc.syshook</cite> command to execute system hooks.
+Thescript also uses the <cite>tee</cite> command to log the output to the <cite>${LOCKFILE}</cite> file.
+If the upgrade is successful, thescript initiates a reboot after a short delay.</p>
+<dl class="simple">
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>opnsense-update</cite>, <cite>rc.syshook</cite>, <cite>tee</cite>, <cite>rc.reboot</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/firmware/config.sh</cite> file to configure the OPNsense environment.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.repos.FreeBSD">
+<span id="repos"></span><h1>repos<a class="headerlink" href="#module-python.autodocs.repos.FreeBSD" title="Link to this heading"></a></h1>
+<section id="script-freebsd-php">
+<h2>script FreeBSD.php<a class="headerlink" href="#script-freebsd-php" title="Link to this heading"></a></h2>
+<p>Disables the FreeBSD repository to avoid breakage.</p>
+<p>This script ensures that the FreeBSD repository is disabled by copying the sample configuration file over the active configuration file.</p>
+<dl>
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>conf : string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The path to the FreeBSD repository configuration file.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<p><em>Actions</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Copies the sample configuration file ($conf . ‘.sample’) over the active configuration file ($conf).</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-opnsense-php">
+<span id="module-python.autodocs.repos.OPNsense"></span><h2>script OPNsense.php<a class="headerlink" href="#script-opnsense-php" title="Link to this heading"></a></h2>
+<p>Updates the OPNsense configuration based on the system settings.</p>
+<p>It also checks for a subscription key and appends the URL suffix if present.
+If no subscription key is set, the license file is deleted.</p>
+<p><em>Params</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>argsv<span class="classifier">array</span></dt><dd><ul>
+<li><p>-A: specifies the ABI (Architecture-Based Interface) to use</p></li>
+<li><p>-m: specifies the mirror URL to use</p></li>
+<li><p>-n: specifies the flavour to use</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.health.updaterrd">
+<span id="health"></span><h1>health<a class="headerlink" href="#module-python.autodocs.health.updaterrd" title="Link to this heading"></a></h1>
+<section id="script-updaterrd-php">
+<h2>script updaterrd.php<a class="headerlink" href="#script-updaterrd-php" title="Link to this heading"></a></h2>
+<p>This script updates the RRD (Round-Robin Database) statistics for OPNsense.</p>
+<p>It uses the OPNsenseCoreConfig class to retrieve the RRD configuration.
+It also uses the OPNsenseRRDFactory class to collect and update the RRD statistics.
+The script checks if the RRD statistics are enabled and if the /var/db/rrd directory exists.
+If debug mode is enabled, the script outputs the total runtime and collection time.</p>
+<dl>
+<dt><em>Params</em> </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>$argv<span class="classifier">array</span></dt><dd><dl class="simple">
+<dt>-h<span class="classifier">bool</span></dt><dd><ul>
+<li><p>Display help message and exit.</p></li>
+</ul>
+</dd>
+<dt>-d<span class="classifier">bool</span></dt><dd><ul>
+<li><p>Enable debug mode, output errors to stdout.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>int</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 on success, non-zero on failure.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="definitions">
+<h1>definitions<a class="headerlink" href="#definitions" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.interfaces.carp_global_status">
+<span id="interfaces"></span><h1>interfaces<a class="headerlink" href="#module-python.autodocs.interfaces.carp_global_status" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>#!/usr/local/bin/php</p></li>
+</ul>
+<section id="script-carp-global-status-php">
+<h2>script carp_global_status.php<a class="headerlink" href="#script-carp-global-status-php" title="Link to this heading"></a></h2>
+<p>This script checks the CARP (Common Address Redundancy Protocol) configuration and returns a JSON response with the current status.</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>a_vip : array - An array of virtual IP addresses.</p></li>
+<li><p>carpcount : int - The number of CARP interfaces found.</p></li>
+<li><p>response : array - An array containing the CARP status information.</p></li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>A JSON-encoded array with the CARP status information.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-carp-set-status-php">
+<span id="module-python.autodocs.interfaces.carp_set_status"></span><h2>script carp_set_status.php<a class="headerlink" href="#script-carp-set-status-php" title="Link to this heading"></a></h2>
+<p>Manages CARP (Common Address Redundancy Protocol) configuration and state.</p>
+<p>This script performs actions on the CARP configuration, such as entering or leaving maintenance mode, disabling or enabling CARP, and configuring interfaces.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argsv[0]<span class="classifier">str</span></dt><dd><ul>
+<li><p>The action to perform (maintenance, disable, enable).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>a_vip : array  - An array of virtual IP addresses.</p></li>
+<li><p>config : array  - The system configuration array.</p></li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>A JSON-encoded array with the result of the action.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-ifctl-sh">
+<span id="module-python.autodocs.interfaces.ifctl"></span><h2>script ifctl.sh<a class="headerlink" href="#script-ifctl-sh" title="Link to this heading"></a></h2>
+<p>Configures and manages interface settings.</p>
+<p>It supports various modes, including nameserver, prefix, router, and searchdomain.
+It also supports IPv4 and IPv6 address families.
+Thescript can perform various actions, including clearing, flushing, dumping, and listing interface settings.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>CMD: str</dt><dd><p>Optional command to specify the action to perform.
+Possible values: -c, -d, -f, -l, -O</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>IF: str</dt><dd><p>Interface name.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MD: str</dt><dd><p>Mode to operate in. Possible values: nameserver, prefix, router, searchdomain</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>AF: str</dt><dd><p>Address family. Possible values: inet, inet6</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>EX: str</dt><dd><p>Extension to append to the file name.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>DO_CONTENTS: str</dt><dd><p>Contents to write to the file.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>DO_VERBOSE: str</dt><dd><p>Flag to enable verbose mode.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p><em>Functions</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>flush_routes: Flushes routes for the specified interface and mode.</p></li>
+<li><p>flush_slaac: Flushes SLAAC addressing for the specified interface.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><em>Notes</em>  - Thisscript uses temporary files to store interface settings.</dt><dd><ul class="simple">
+<li><p>Thescript uses the <cite>route</cite> command to manipulate routes.</p></li>
+<li><p>Thescript uses the <cite>ifconfig</cite> command to manipulate interface settings.</p></li>
+<li><dl class="simple">
+<dt>This Script uses getopts to parse command-line options:</dt><dd><ul>
+<li><p>getopts: getopts optstring name [arg …]</p></li>
+<li><p>Getopts is used by shell procedures to parse positional parameters as options.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-reconfigure-gifs-php">
+<span id="module-python.autodocs.interfaces.reconfigure_gifs"></span><h2>script reconfigure_gifs.php<a class="headerlink" href="#script-reconfigure-gifs-php" title="Link to this heading"></a></h2>
+<p>A script to reconfigure GIF interfaces.</p>
+<p>This script uses the <cite>file_exists</cite>, <cite>filesize</cite>, <cite>fopen</cite>, <cite>flock</cite>, <cite>fread</cite>, <cite>fwrite</cite>, <cite>ftruncate</cite>, <cite>explode</cite>, <cite>trim</cite>, and other functions to interact with the file system and configure the GIF interfaces.</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>$gifs_todo: An array to store the GIF interfaces to reconfigure</p></li>
+<li><p>$vfilename: The path to the file containing the GIF interfaces to reconfigure</p></li>
+<li><p>$gif_configure: An array to store the GIF interfaces to reconfigure</p></li>
+<li><p>$ifdetails: An array to store the interface details</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>file_exists(string $filename): Checks if a file exists</p></li>
+<li><p>filesize(string $filename): Returns the size of a file</p></li>
+<li><p>fopen(string $filename, string $mode): Opens a file pointer</p></li>
+<li><p>flock(resource $handle, int $operation): Locks or unlocks a file</p></li>
+<li><p>fread(resource $handle, int $length): Reads from a file pointer</p></li>
+<li><p>fwrite(resource $handle, string $string): Writes to a file pointer</p></li>
+<li><p>ftruncate(resource $handle, int $size): Truncates a file to a specified size</p></li>
+<li><p>explode(string $delimiter, string $string): Splits a string into an array using a delimiter</p></li>
+<li><p>trim(string $string): Removes whitespace from a string</p></li>
+<li><p>OPNsenseInterfacesGif()-&gt;gif-&gt;iterateItems(): Iterates over the GIF interfaces</p></li>
+<li><p>legacy_interface_destroy(string $interface): Destroys a legacy interface</p></li>
+<li><p>legacy_interfaces_details(): Returns the interface details</p></li>
+<li><p>interfaces_addresses_flush(string $interface, int $family, array $ifdetails): Flushes addresses from an interface</p></li>
+<li><p>_interfaces_gif_configure(array $gif): Configures a GIF interface</p></li>
+<li><p>interfaces_restart_by_device(bool $force, array $interfaces): Restarts interfaces</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Reads the file containing the GIF interfaces to reconfigure</p></li>
+<li><p>Collects the GIF interfaces to reconfigure</p></li>
+<li><p>Removes non-existing interfaces</p></li>
+<li><p>Reconfigures the still existing GIF interfaces</p></li>
+<li><p>Removes addresses from the interfaces (if necessary)</p></li>
+<li><p>Configures the GIF interfaces</p></li>
+<li><p>Re-applies additional addresses and hooks routing (if necessary)</p></li>
+</ul>
+</dd>
+</dl>
+<p>/</p>
+</section>
+<section id="script-reconfigure-gres-php">
+<span id="module-python.autodocs.interfaces.reconfigure_gres"></span><h2>script reconfigure_gres.php<a class="headerlink" href="#script-reconfigure-gres-php" title="Link to this heading"></a></h2>
+<p>A script to reconfigure GRE interfaces.</p>
+<p>This script uses the <cite>file_exists</cite>, <cite>filesize</cite>, <cite>fopen</cite>, <cite>flock</cite>, <cite>fread</cite>, <cite>fwrite</cite>, <cite>ftruncate</cite>, <cite>explode</cite>, <cite>trim</cite>, and other functions to interact with the file system and configure the GRE interfaces</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>$gres_todo: An array to store the GRE interfaces to reconfigure</p></li>
+<li><p>$vfilename: The path to the file containing the GRE interfaces to reconfigure</p></li>
+<li><p>$gre_configure: An array to store the GRE interfaces to reconfigure</p></li>
+<li><p>$ifdetails: An array to store the interface details</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>file_exists(string $filename): Checks if a file exists</p></li>
+<li><p>filesize(string $filename): Returns the size of a file</p></li>
+<li><p>fopen(string $filename, string $mode): Opens a file pointer</p></li>
+<li><p>flock(resource $handle, int $operation): Locks or unlocks a file</p></li>
+<li><p>fread(resource $handle, int $length): Reads from a file pointer</p></li>
+<li><p>fwrite(resource $handle, string $string): Writes to a file pointer</p></li>
+<li><p>ftruncate(resource $handle, int $size): Truncates a file to a specified size</p></li>
+<li><p>explode(string $delimiter, string $string): Splits a string into an array using a delimiter</p></li>
+<li><p>trim(string $string): Removes whitespace from a string</p></li>
+<li><p>OPNsenseInterfacesGre()-&gt;gre-&gt;iterateItems(): Iterates over the GRE interfaces</p></li>
+<li><p>legacy_interface_destroy(string $interface): Destroys a legacy interface</p></li>
+<li><p>legacy_interfaces_details(): Returns the interface details</p></li>
+<li><p>interfaces_addresses_flush(string $interface, int $family, array $ifdetails): Flushes addresses from an interface</p></li>
+<li><p>_interfaces_gre_configure(array $gre): Configures a GRE interface</p></li>
+<li><p>interfaces_restart_by_device(bool $force, array $interfaces): Restarts interfaces</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Reads the file containing the GRE interfaces to reconfigure</p></li>
+<li><p>Collects the GRE interfaces to reconfigure</p></li>
+<li><p>Removes non-existing interfaces</p></li>
+<li><p>Reconfigures the still existing GRE interfaces</p></li>
+<li><p>Removes addresses from the interfaces (if necessary)</p></li>
+<li><p>Configures the GRE interfaces</p></li>
+<li><p>Re-applies additional addresses and hooks routing (if necessary)</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-reconfigure-laggs-php">
+<span id="module-python.autodocs.interfaces.reconfigure_laggs"></span><h2>script reconfigure_laggs.php<a class="headerlink" href="#script-reconfigure-laggs-php" title="Link to this heading"></a></h2>
+<p>A script to reconfigure LAGG interfaces.</p>
+<p>This script uses the <cite>file_exists</cite>, <cite>filesize</cite>, <cite>fopen</cite>, <cite>flock</cite>, <cite>fread</cite>, <cite>fwrite</cite>, <cite>ftruncate</cite>, <cite>explode</cite>, <cite>trim</cite>, and other functions to interact with the file system and configure the LAGG interfaces</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>$laggs_todo: An array to store the LAGG interfaces to reconfigure</p></li>
+<li><p>$vfilename: The path to the file containing the LAGG interfaces to reconfigure</p></li>
+<li><p>$lagg_configure: An array to store the LAGG interfaces to reconfigure</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>file_exists(string $filename): Checks if a file exists</p></li>
+<li><p>filesize(string $filename): Returns the size of a file</p></li>
+<li><p>fopen(string $filename, string $mode): Opens a file pointer</p></li>
+<li><p>flock(resource $handle, int $operation): Locks or unlocks a file</p></li>
+<li><p>fread(resource $handle, int $length): Reads from a file pointer</p></li>
+<li><p>fwrite(resource $handle, string $string): Writes to a file pointer</p></li>
+<li><p>ftruncate(resource $handle, int $size): Truncates a file to a specified size</p></li>
+<li><p>explode(string $delimiter, string $string): Splits a string into an array using a delimiter</p></li>
+<li><p>trim(string $string): Removes whitespace from a string</p></li>
+<li><p>OPNsenseInterfacesLagg()-&gt;lagg-&gt;iterateItems(): Iterates over the LAGG interfaces</p></li>
+<li><p>legacy_interface_destroy(string $interface): Destroys a legacy interface</p></li>
+<li><p>_interfaces_lagg_configure(array $lagg): Configures a LAGG interface</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Reads the file containing the LAGG interfaces to reconfigure</p></li>
+<li><p>Collects the LAGG interfaces to reconfigure</p></li>
+<li><p>Removes non-existing interfaces</p></li>
+<li><p>Reconfigures the still existing LAGG interfaces</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-reconfigure-neighbors-php">
+<span id="module-python.autodocs.interfaces.reconfigure_neighbors"></span><h2>script reconfigure_neighbors.php<a class="headerlink" href="#script-reconfigure-neighbors-php" title="Link to this heading"></a></h2>
+<p>This script uses the interfaces_neighbors_configure() function to configure the neighbors.</p>
+<p>The interfaces_neighbors_configure() function is defined in another module and is not part of this script.
+This script is very simple and consists of only one function call.</p>
+<dl class="simple">
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>interfaces_neighbors_configure(): Configures the neighbors</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Calls the interfaces_neighbors_configure() function to configure the neighbors</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-reconfigure-vips-php">
+<span id="module-python.autodocs.interfaces.reconfigure_vips"></span><h2>script reconfigure_vips.php<a class="headerlink" href="#script-reconfigure-vips-php" title="Link to this heading"></a></h2>
+<p>A script to reconfigure the Virtual IPs (VIPs).</p>
+<dl class="simple">
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>legacy_interfaces_details(): Returns the interface details</p></li>
+<li><p>legacy_config_get_interfaces(): Returns the interface configurations</p></li>
+<li><p>legacy_interface_deladdress(): Deletes an IP address from an interface</p></li>
+<li><p>interface_ipalias_configure(): Configures an IP alias interface</p></li>
+<li><p>interface_carp_configure(): Configures a CARP interface</p></li>
+<li><p>interface_proxyarp_configure(): Configures the proxy ARP</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Collects the IP addresses and their corresponding interfaces</p></li>
+<li><p>Removes deleted VIPs</p></li>
+<li><p>Compares the actual VIP configuration with the desired configuration</p></li>
+<li><p>Configures the VIPs based on the desired configuration</p></li>
+</ul>
+</dd>
+</dl>
+<p>/</p>
+</section>
+<section id="script-reconfigure-vlans-php">
+<span id="module-python.autodocs.interfaces.reconfigure_vlans"></span><h2>script reconfigure_vlans.php<a class="headerlink" href="#script-reconfigure-vlans-php" title="Link to this heading"></a></h2>
+<p>A script to reconfigure the VLANs.</p>
+<dl class="simple">
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>legacy_interfaces_details(): Returns the interface details</p></li>
+<li><p>legacy_interface_destroy(): Destroys an interface</p></li>
+<li><p>legacy_vlan_remove_tag(): Removes a VLAN tag from an interface</p></li>
+<li><p>legacy_vlan_tag(): Adds a VLAN tag to an interface</p></li>
+<li><p>legacy_vlan_pcp(): Sets the PCP (Priority Code Point) for a VLAN</p></li>
+<li><p>legacy_vlan_proto(): Sets the protocol for a VLAN</p></li>
+<li><p>_interfaces_vlan_configure(): Configures a VLAN interface</p></li>
+<li><p>ifgroup_setup(): Sets up the interface groups</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Collects all relevant VLANs (new, updated, and removed) into a single list</p></li>
+<li><p>Merges the configured VLANs with the existing VLANs</p></li>
+<li><p>Handles existing VLANs (removed, changed, or unchanged)</p></li>
+<li><p>Configures new VLANs</p></li>
+<li><p>Sets up the interface groups</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-rtsold-resolvconf-sh">
+<span id="module-python.autodocs.interfaces.rtsold_resolvconf"></span><h2>script rtsold_resolvconf.sh<a class="headerlink" href="#script-rtsold-resolvconf-sh" title="Link to this heading"></a></h2>
+<p>Processes Router Advertisements (RA) with RDNSS and DNSSL options.</p>
+<p>Thisscript is invoked by rtsold when a Router Advertisement with RDNSS  and DNSSL options is received. It extracts the interface, router, and DNS information from the arguments and STDIN.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><dl class="simple">
+<dt>Action: </dt><dd><ul>
+<li><p>“-a” to add DNS information</p></li>
+<li><p>“-d” to delete DNS information</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>${2}<span class="classifier">str</span></dt><dd><ul>
+<li><p>Interface information: “ifname:slaac:[RA source address]”</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript uses the ifctl(8) and configctl(8) commands to modify
+the interface configuration.</p></li>
+<li><p>It uses the /var/etc/radvd.conf file to recognize its own configuration.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-traffic-stats-php">
+<span id="module-python.autodocs.interfaces.traffic_stats"></span><h2>script traffic_stats.php<a class="headerlink" href="#script-traffic-stats-php" title="Link to this heading"></a></h2>
+<p>This script uses the <cite>legacy_config_get_interfaces</cite> and <cite>legacy_interface_stats</cite> functions to collect interface information and statistics.</p>
+<p>It also uses the <cite>map_ifs</cite> function to map interface data to a standardized format.
+If an interval is specified, the script will collect statistics at that interval and output the results in a streaming format.
+If no interval is specified, the script will collect statistics once and output the results in a single JSON object.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>srgsv[0]<span class="classifier">int</span></dt><dd><ul>
+<li><p>The interval in seconds to collect traffic statistics.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>string</dt><dd><ul>
+<li><p>The traffic statistics in JSON format.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>/</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.ipsec.get_legacy_vti">
+<span id="ipsec"></span><h1>ipsec<a class="headerlink" href="#module-python.autodocs.ipsec.get_legacy_vti" title="Link to this heading"></a></h1>
+<section id="script-get-legacy-vti-php">
+<h2>script get_legacy_vti.php<a class="headerlink" href="#script-get-legacy-vti-php" title="Link to this heading"></a></h2>
+<p>This script uses the ipsec_get_configured_vtis() function to retrieve the list of configured IPsec VTIs.</p>
+<p>The result is output in JSON format using the json_encode() function.</p>
+<dl class="simple">
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><p>A JSON-encoded array containing the list of configured IPsec VTIs.</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em></dt><dd><ul class="simple">
+<li><p>require_once(string $filename) : void -  Includes the specified file.</p></li>
+<li><p>ipsec_get_configured_vtis() : array -  Retrieves a list of configured IPsec VTIs.</p></li>
+<li><p>json_encode(array $data) : string -  Encodes the data in JSON format.</p></li>
+</ul>
+</dd>
+<dt><em>Arguments</em></dt><dd><ul class="simple">
+<li><p>result : array -  An array to store the result.</p></li>
+<li><p>vti : array -  The current VTI.</p></li>
+<li><p>record : array -  An array to store the VTI record.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.netflow.flush_all">
+<span id="netflow"></span><h1>netflow<a class="headerlink" href="#module-python.autodocs.netflow.flush_all" title="Link to this heading"></a></h1>
+<section id="script-flush-all-sh">
+<h2>script flush_all.sh<a class="headerlink" href="#script-flush-all-sh" title="Link to this heading"></a></h2>
+<p>Flushes local netflow data.</p>
+<p>If the “all” argument is provided, it stops the flowd and flowd_aggregate services,
+removes all netflow data files and log files, and then starts the services again.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}: str</dt><dd><ul>
+<li><p>If str == “all” provided, all local netflow data will be flushed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="openssh">
+<h1>openssh<a class="headerlink" href="#openssh" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.openvpn.client_connect">
+<span id="openvpn"></span><h1>openvpn<a class="headerlink" href="#module-python.autodocs.openvpn.client_connect" title="Link to this heading"></a></h1>
+<section id="script-client-connect-php">
+<h2>script client_connect.php<a class="headerlink" href="#script-client-connect-php" title="Link to this heading"></a></h2>
+<p>This script authenticates an OpenVPN user based on the provided common name and server ID, and generates a client configuration file if required.</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>common_name : string - The common name of the user.</p></li>
+<li><p>vpnid : string - The ID of the OpenVPN server.</p></li>
+<li><p>config_file : string - The path to the client configuration file.</p></li>
+<li><p>server : OPNsenseOpenVPNOpenVPN - The OpenVPN server instance.</p></li>
+<li><p>cso : OPNsenseOpenVPNOpenVPN - The client-specific override configuration.</p></li>
+</ul>
+</dd>
+<dt><em>Environment Variables</em></dt><dd><ul class="simple">
+<li><p>common_name : The common name of the user.</p></li>
+<li><p>auth_server : The ID of the OpenVPN server.</p></li>
+<li><p>config_file : The path to the client configuration file.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-client-disconnect-sh">
+<span id="module-python.autodocs.openvpn.client_disconnect"></span><h2>script client_disconnect.sh<a class="headerlink" href="#script-client-disconnect-sh" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt><em>Returns</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>int</dt><dd><ul>
+<li><p>The exit status of thescript.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-ovpn-service-control-php">
+<span id="module-python.autodocs.openvpn.ovpn_service_control"></span><h2>script ovpn_service_control.php<a class="headerlink" href="#script-ovpn-service-control-php" title="Link to this heading"></a></h2>
+<p>Controls the OpenVPN instances on the system.
+It can be used to start, stop, restart, or configure instances.</p>
+<dl class="simple">
+<dt><em>Parameters</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>$argv<span class="classifier">array</span></dt><dd><ul>
+<li><dl class="simple">
+<dt>$argsv[-2]<span class="classifier">str</span></dt><dd><ul>
+<li><p>action: stop|start|restart|configure</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>$argsv[-1]<span class="classifier">str </span></dt><dd><ul>
+<li><p>uuid: UUID of the instance</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>-a: all instances</p></li>
+<li><p>-h: help</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>setup_interface($instance): Configures the network interface for the OpenVPN instance.</p></li>
+<li><p>ovpn_start($instance, $fhandle): Starts the OpenVPN instance.</p></li>
+<li><p>ovpn_stop($instance, $destroy_if = false): Stops the OpenVPN instance.</p></li>
+<li><p>ovpn_instance_stats($instance, $fhandle): Reads the statistics of the OpenVPN instance.</p></li>
+<li><p>get_vhid_status(): Reads the status of the CARP instances.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-tls-verify-php">
+<span id="module-python.autodocs.openvpn.tls_verify"></span><h2>script tls_verify.php<a class="headerlink" href="#script-tls-verify-php" title="Link to this heading"></a></h2>
+<p>This script verifies the certificate depth for OpenVPN authentication.</p>
+<p>It uses the OPNsenseOpenVPNOpenVPN class to retrieve the server instance by ID.
+It also uses the OPNsenseTrustStore class to validate the OCSP response.
+The script checks the certificate depth and OCSP validation for the given server ID.
+If the verification fails, it logs a warning message and exits with a non-zero status code.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argsv[0]<span class="classifier">str</span></dt><dd><ul>
+<li><p>The auth_server  identifier for authentication.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>int</dt><dd><ul>
+<li><p>0 on success, 1 on failure.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-user-pass-verify-php">
+<span id="module-python.autodocs.openvpn.user_pass_verify"></span><h2>script user_pass_verify.php<a class="headerlink" href="#script-user-pass-verify-php" title="Link to this heading"></a></h2>
+<p>It also uses the OPNsenseOpenVPNOpenVPN class to retrieve OpenVPN server information and create client-specific overrides.
+The script logs authentication results to the syslog.</p>
+<dl>
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>auth_server : string - The ID of the OpenVPN server.</p></li>
+<li><p>auth_method : string - The authentication method to use (via-env or via-file).</p></li>
+<li><p>common_name : string - The common name of the certificate.</p></li>
+<li><p>auth_file : string - The file containing the username and password (when using via-file method).</p></li>
+<li><p>auth_defer : bool - Whether to defer authentication to another process.</p></li>
+<li><p>auth_control_file : string - The file to write the authentication result to (when using auth_defer).</p></li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>int</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>0 on success, non-zero on failure.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.routes.del_route">
+<span id="routes"></span><h1>routes<a class="headerlink" href="#module-python.autodocs.routes.del_route" title="Link to this heading"></a></h1>
+<section id="script-del-route-py">
+<h2>script del_route.py<a class="headerlink" href="#script-del-route-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>destination<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: destination</p></li>
+<li><p>options : [’–destination’]</p></li>
+<li><p>required : True</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>gateway<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: gateway</p></li>
+<li><p>options : [’–gateway’]</p></li>
+<li><p>required : True</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-gateway-status-php">
+<span id="module-python.autodocs.routes.gateway_status"></span><h2>script gateway_status.php<a class="headerlink" href="#script-gateway-status-php" title="Link to this heading"></a></h2>
+<p>This script retrieves the status of gateways using the dpinger_status() function, and generates a JSON-encoded result containing information about each gateway.</p>
+<dl class="simple">
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>A JSON-encoded array containing information about each gateway.</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>dpinger_status() : Retrieves the status of gateways.</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Variables</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>result : array - An array to store the result of the script.</p></li>
+<li><p>gateways_status : array    - An array containing the status of each gateway.</p></li>
+<li><p>gname : string - The name of the current gateway.</p></li>
+<li><p>gw : array - An array containing information about the current gateway.</p></li>
+<li><p>gatewayItem : array    - An array to store information about the current gateway.</p></li>
+<li><p>status_translated : string - A translated version of the status of the current gateway.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-gateway-watcher-php">
+<span id="module-python.autodocs.routes.gateway_watcher"></span><h2>script gateway_watcher.php<a class="headerlink" href="#script-gateway-watcher-php" title="Link to this heading"></a></h2>
+<p>Dieses Script überwacht die Gateways und generiert Alarme, wenn ein Gateway nicht erreichbar ist.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>$argv[1]<span class="classifier">string</span></dt><dd><ul>
+<li><p>the action to execute: <cite>configd_run($action)</cite></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>signalhandler($signal) : Function called when a signal is received.</p></li>
+<li><p>dpinger_status() : Function that returns the status of the gateways.</p></li>
+<li><p>config_read_array($section, $key) : Function that returns an array from the configuration.</p></li>
+<li><p>shell_safe($command, $args) : Function that safely executes a command.</p></li>
+<li><p>syslog($priority, $message) : Function that writes a message to the system log.</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Variables</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>$config : array The system configuration.</p></li>
+<li><p>$mode : array An array that stores the status of the gateways.</p></li>
+<li><p>$poll : int The poll interval in seconds.</p></li>
+<li><p>$wait : int The wait interval in seconds.</p></li>
+<li><p>$alarm : bool A flag that indicates whether an alarm has been generated.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-gateways-php">
+<span id="module-python.autodocs.routes.gateways"></span><h2>script gateways.php<a class="headerlink" href="#script-gateways-php" title="Link to this heading"></a></h2>
+<p>Retrieves a list of gateways and their corresponding IP addresses or protocols.</p>
+<p>This script retrieves a list of gateways and their corresponding IP addresses or protocols, and outputs the result in JSON format.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>$argvs<span class="classifier">array</span></dt><dd><ul>
+<li><p>-g : Adds gateway groups to the result.</p></li>
+<li><p>-h : Displays the usage help.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>A JSON-encoded array containing the list of gateways and their corresponding IP addresses or protocols.</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>getopt(string $shortopts, array $longopts = [], int &amp;$optind = 0) : array</p></li>
+<li><p>Parses the command-line options.</p></li>
+<li><p>array_slice(array $array, int $offset, int $length = null) : array</p></li>
+<li><p>Extracts a slice of the array.</p></li>
+<li><p>is_ipaddr(string $ip) : bool</p></li>
+<li><p>Checks if the given string is a valid IP address.</p></li>
+</ul>
+</dd>
+<dt><em>Variables</em></dt><dd><ul class="simple">
+<li><p>mdl : OPNsenseRoutingGateways -  An instance of the Gateways class.</p></li>
+<li><p>gateways : array -  An array containing the list of gateways.</p></li>
+<li><p>ret : array -  An array to store the result.</p></li>
+<li><p>opts : array -  An array containing the parsed command-line options.</p></li>
+<li><p>args : array -  An array containing the remaining command-line arguments.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="shaper">
+<h1>shaper<a class="headerlink" href="#shaper" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.shell.banner">
+<span id="shell"></span><h1>shell<a class="headerlink" href="#module-python.autodocs.shell.banner" title="Link to this heading"></a></h1>
+<section id="script-banner-php">
+<h2>script banner.php<a class="headerlink" href="#script-banner-php" title="Link to this heading"></a></h2>
+<p>Displays system information and network interface details.</p>
+<p>This script prints the system hostname, domain, and version, followed by a list of assigned network interfaces with their IP addresses, classes, and other details.</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>version<span class="classifier">str</span></dt><dd><ul>
+<li><p>The system version.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>iflist<span class="classifier">array</span></dt><dd><ul>
+<li><p>A list of network interfaces.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>ifdetails<span class="classifier">array</span></dt><dd><ul>
+<li><p>A list of network interface details.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-defaults-php">
+<span id="module-python.autodocs.shell.defaults"></span><h2>script defaults.php<a class="headerlink" href="#script-defaults-php" title="Link to this heading"></a></h2>
+<p>Resets the firewall to factory defaults.</p>
+<p>This script prompts the user to confirm whether they want to reset the firewall to factory defaults, and then calls the reset_factory_defaults() function if the user confirms.</p>
+<dl>
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>fp : resource</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>A file pointer to the standard input stream.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>yes_no_prompt : string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The prompt to display to the user.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>reset_factory_defaults() : Resets the firewall to factory defaults.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-firmware-sh">
+<span id="module-python.autodocs.shell.firmware"></span><h2>script firmware.sh<a class="headerlink" href="#script-firmware-sh" title="Link to this heading"></a></h2>
+<p>Thisscript performs firmware actions, such as fetching changelogs, running updates, and performing upgrades.
+It checks if an update or upgrade is available and prompts the user to confirm whether to proceed.
+If the user agrees, the update or upgrade is executed.</p>
+<dl class="simple">
+<dt>Functions:</dt><dd><ul class="simple">
+<li><p>run_action: Performs a firmware action and waits for user input.</p></li>
+<li><p>Fetches changelogs and updates.</p></li>
+<li><p>Checks if an upgrade is available.</p></li>
+<li><p>Runs updates and upgrades.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-halt-php">
+<span id="module-python.autodocs.shell.halt"></span><h2>script halt.php<a class="headerlink" href="#script-halt-php" title="Link to this heading"></a></h2>
+<p>This script halts the system and powers it off after the user confirms that they want to proceed.</p>
+<p>This script uses the passthru() function to execute the system command ‘/usr/local/etc/rc.halt’.
+The user must confirm that they want to proceed before the system is shut down.</p>
+<dl class="simple">
+<dt><em>Functions</em></dt><dd><ul class="simple">
+<li><p>require_once(string $filename) : void - Includes the specified file.</p></li>
+<li><p>fopen(string $filename, string $mode) : resource -  Opens a file or other file system.</p></li>
+<li><p>fgets(resource $stream) : string -  Reads a line from a file stream.</p></li>
+<li><p>strcasecmp(string $str1, string $str2) : int -  Compares two strings without considering case.</p></li>
+<li><p>passthru(string $command) : void -  Executes a system command and returns the output.</p></li>
+<li><p>fclose(resource $stream) : bool -  Closes a file stream.</p></li>
+</ul>
+</dd>
+<dt><em>Variables</em></dt><dd><ul class="simple">
+<li><p>fp : resource</p></li>
+<li><p>A file stream opened to the standard input.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-password-php">
+<span id="module-python.autodocs.shell.password"></span><h2>script password.php<a class="headerlink" href="#script-password-php" title="Link to this heading"></a></h2>
+<p>A script to reset the root user account.</p>
+<p><em>Parameters</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>$argv[2] and $argv[3]: Options for the script</dt><dd><ul>
+<li><p>-h 0: Mocking “pw usermod root -h 0”</p></li>
+<li><p>-x 0: Creates a new root user if none exists</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>$fp : input stream</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>getUserEntryByUID(int $uid): Returns the user entry for the given UID</p></li>
+<li><p>local_user_set_password(array $user, string $password): Sets the password for the given user</p></li>
+<li><p>local_user_set(array $user): Saves the user entry</p></li>
+<li><p>write_config(string $message): Writes a message to the configuration</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Checks if the options -h 0 or -x 0 were provided</p></li>
+<li><p>If -h 0, sets the password for the root user</p></li>
+<li><p>If -x 0, creates a new root user if none exists and sets the password</p></li>
+<li><p>If no options were provided, asks if the user wants to restore the default authentication mode</p></li>
+<li><p>If the user wants to restore the default authentication mode, sets the password for the root user</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Outputs</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Messages for resetting the root user account</p></li>
+<li><p>Error messages if the password is empty or does not match</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-ping-php">
+<span id="module-python.autodocs.shell.ping"></span><h2>script ping.php<a class="headerlink" href="#script-ping-php" title="Link to this heading"></a></h2>
+<p>A script to ping a host name or IP address.</p>
+<p>This script uses the <cite>fopen</cite>, <cite>fgets</cite>, <cite>escapeshellarg</cite>, <cite>passthru</cite>, and <cite>fclose</cite> functions to interact with the user and execute the ping command.
+The script assumes that the [/sbin/ping](cci:7://file:///sbin/ping:0:0-0:0) command is available on the system.</p>
+<p><em>Parameters</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>$fp: The file pointer for standard input</p></li>
+<li><p>$pinghost: The host name or IP address to ping</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>fopen(string $filename, string $mode): Opens a file pointer</p></li>
+<li><p>fgets(resource $fp): Reads a line from the file pointer</p></li>
+<li><p>escapeshellarg(string $arg): Escapes a shell argument</p></li>
+<li><p>passthru(string $command): Executes a shell command and displays the output</p></li>
+<li><p>fclose(resource $fp): Closes a file pointer</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Opens the standard input file pointer</p></li>
+<li><p>Prompts the user to enter a host name or IP address</p></li>
+<li><p>Reads the user input and stores it in the $pinghost variable</p></li>
+<li><p>Pings the host name or IP address using the [/sbin/ping](cci:7://file:///sbin/ping:0:0-0:0) command with the <cite>-c 3</cite> and <cite>-n</cite> options</p></li>
+<li><p>Displays the output of the ping command</p></li>
+<li><p>Prompts the user to press ENTER to continue</p></li>
+<li><p>Reads the user input and closes the standard input file pointer</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Outputs</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The output of the ping command</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-netboot-php">
+<span id="module-python.autodocs.shell.reboot"></span><h2>script netboot.php<a class="headerlink" href="#script-netboot-php" title="Link to this heading"></a></h2>
+<p>A script to reboot the system after confirmation.</p>
+<p>This script uses the <cite>fopen</cite>, <cite>fgets</cite>, <cite>chop</cite>, <cite>strcasecmp</cite>, <cite>passthru</cite>, and <cite>fclose</cite> functions to interact with the user and execute the reboot command.
+The script assumes that the <cite>/usr/local/etc/rc.reboot</cite> command is available on the system and will reboot the system.</p>
+<p><em>Parameters</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>$fp: The file pointer for standard input</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>fopen(string $filename, string $mode): Opens a file pointer</p></li>
+<li><p>fgets(resource $fp): Reads a line from the file pointer</p></li>
+<li><p>chop(string $string): Removes trailing whitespace from a string</p></li>
+<li><p>strcasecmp(string $str1, string $str2): Compares two strings in a case-insensitive manner</p></li>
+<li><p>passthru(string $command): Executes a shell command and displays the output</p></li>
+<li><p>fclose(resource $fp): Closes a file pointer</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Opens the standard input file pointer</p></li>
+<li><p>Prompts the user to confirm the reboot</p></li>
+<li><p>Reads the user input and checks if it matches ‘y’ (case-insensitive)</p></li>
+<li><p>If confirmed, executes the <cite>/usr/local/etc/rc.reboot</cite> command to reboot the system</p></li>
+<li><p>Closes the standard input file pointer</p></li>
+</ul>
+</dd>
+</dl>
+<p><em>Outputs</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The output of the reboot command (if executed)</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="script-restore-sh">
+<span id="module-python.autodocs.shell.restore"></span><h2>script restore.sh<a class="headerlink" href="#script-restore-sh" title="Link to this heading"></a></h2>
+<p>Restores a backup of the OPNsense configuration.</p>
+<p>It lists all available backups, allows the user to select one, and then restores it.
+Thescript also offers the option to reboot the system to apply the backup cleanly.</p>
+<dl class="simple">
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>cd</cite>, <cite>find</cite>, <cite>date</cite>, <cite>sort</cite>, <cite>head</cite>, <cite>echo</cite>, <cite>read</cite>, <cite>cp</cite>, <cite>rc.reboot</cite>, <cite>rc.reload_all</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/conf/backup</cite> directory to store the backups.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<ul class="simple" id="module-python.autodocs.shell.setaddr">
+<li></li>
+</ul>
+<section id="script-script-setaddr-php">
+<h2>script script setaddr.php<a class="headerlink" href="#script-script-setaddr-php" title="Link to this heading"></a></h2>
+<p>This script is used to configure IP addresses and gateways for network interfaces.</p>
+<dl>
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>argsv[0]<span class="classifier">str</span></dt><dd><ul>
+<li><p>The name of the network interface to configure.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>$fp - input stream</dt><dd><ul>
+<li><p>$fp = fopen(‘php://stdin’, ‘r’);</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>intip : str -  The new IPv4 address for the interface.</p></li>
+<li><p>intbits : int -  The subnet bit count for the IPv4 address.</p></li>
+<li><p>gwname : str -  The name of the gateway for the interface.</p></li>
+<li><p>nameserver : str -  The name server for the interface.</p></li>
+<li><p>intip6 : str -  The new IPv6 address for the interface.</p></li>
+<li><p>intbits6 : int -  The subnet bit count for the IPv6 address.</p></li>
+<li><p>gwname6 : str -  The name of the gateway for the IPv6 interface.</p></li>
+<li><p>nameserver6 : str -  The name server for the IPv6 interface.</p></li>
+</ul>
+<blockquote>
+<div><p>The script does not return any value.</p>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<section id="script-setports-php">
+<span id="module-python.autodocs.shell.setports"></span><h2>script setports.php<a class="headerlink" href="#script-setports-php" title="Link to this heading"></a></h2>
+<p>This script configures the networking interfaces and ports for the system.</p>
+<p>The script stops local servers to prevent faulty leases and then configures the interfaces, routing, DHCP, and VPN settings.</p>
+<dl>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>bool</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>true if the configuration was successful, false otherwise</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>This script requires the following files to be included:</dt><dd><ul class="simple">
+<li><p>config.inc</p></li>
+<li><p>console.inc</p></li>
+<li><p>filter.inc</p></li>
+<li><p>util.inc</p></li>
+<li><p>system.inc</p></li>
+<li><p>interfaces.inc</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.suricata.listRuleMetadata">
+<span id="suricata"></span><h1>suricata<a class="headerlink" href="#module-python.autodocs.suricata.listRuleMetadata" title="Link to this heading"></a></h1>
+<section id="script-listrulemetadata-py">
+<h2>script listRuleMetadata.py<a class="headerlink" href="#script-listrulemetadata-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>mode<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: fetch mode</p></li>
+<li><p>options : [’–mode’]</p></li>
+<li><p>default : properties</p></li>
+<li><p>choices : [‘properties’, ‘rules’]</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-suricata-setup-sh">
+<span id="module-python.autodocs.suricata.setup"></span><h2>script suricata_setup.sh<a class="headerlink" href="#script-suricata-setup-sh" title="Link to this heading"></a></h2>
+<p>Sets up the Suricata directories and configuration files.</p>
+<p>It creates the necessary directories, sets the ownership and permissions, and creates a placeholder file if necessary.</p>
+<dl class="simple">
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>mkdir</cite>, <cite>chown</cite>, <cite>chmod</cite>, <cite>touch</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/var/log/suricata</cite> directory for Suricata logs.</p></li>
+<li><p>Thescript creates the <cite>/usr/local/etc/suricata/installed_rules.yaml</cite> file if it does not exist.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.syslog.clearlog">
+<span id="syslog"></span><h1>syslog<a class="headerlink" href="#module-python.autodocs.syslog.clearlog" title="Link to this heading"></a></h1>
+<section id="script-clearlog-php">
+<h2>script clearlog.php<a class="headerlink" href="#script-clearlog-php" title="Link to this heading"></a></h2>
+<p>Clears log files for a specific module or service.</p>
+<p>This script removes log files for a specified module or service, and restarts the system syslog service.</p>
+<dl>
+<dt><em>Params</em> -    argsv<span class="classifier">array  </span></dt><dd><ul class="simple">
+<li><ul>
+<li><p>-h : Show help text and exit.</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>-m : Specify the module name.</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>-f : Specify the log file name.</p></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>opts : array</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>An array of command-line options.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>mname : string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The name of the module or service.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>fname : string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The name of the log file.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>basename : string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The base path of the log file.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<section id="script-list-applications-php">
+<span id="module-python.autodocs.syslog.list_applications"></span><h2>script list_applications.php<a class="headerlink" href="#script-list-applications-php" title="Link to this heading"></a></h2>
+<p>Retrieves a list of syslog facilities and their corresponding plugin names.</p>
+<dl>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>A JSON-encoded array containing syslog facilities as keys and plugin names as values.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<section id="script-querylog-py">
+<span id="module-python.autodocs.syslog.queryLog"></span><h2>script queryLog.py<a class="headerlink" href="#script-querylog-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>output<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: output type [json/text]</p></li>
+<li><p>options : [’–output’]</p></li>
+<li><p>default : json</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>filter<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: filter results</p></li>
+<li><p>options : [’–filter’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>limit<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: limit number of results</p></li>
+<li><p>options : [’–limit’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>offset<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: begin at row number</p></li>
+<li><p>options : [’–offset’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>filename<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: log file name (excluding .log extension)</p></li>
+<li><p>options : [’–filename’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>module<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: module</p></li>
+<li><p>options : [’–module’]</p></li>
+<li><p>default : core</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>severity<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: comma separated list of severities</p></li>
+<li><p>options : [’–severity’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>valid_from<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: oldest data to search for (epoch)</p></li>
+<li><p>options : [’–valid_from’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-streamlog-py">
+<span id="module-python.autodocs.syslog.streamLog"></span><h2>script streamLog.py<a class="headerlink" href="#script-streamlog-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>filter<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: filter results</p></li>
+<li><p>options : [’–filter’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>offset<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: include last N matching lines</p></li>
+<li><p>options : [’–offset’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>filename<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: log file name (excluding .log extension)</p></li>
+<li><p>options : [’–filename’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>module<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: module</p></li>
+<li><p>options : [’–module’]</p></li>
+<li><p>default : core</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>severity<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: comma separated list of severities</p></li>
+<li><p>options : [’–severity’]</p></li>
+<li><p>default :</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.system.cpu">
+<span id="system"></span><h1>system<a class="headerlink" href="#module-python.autodocs.system.cpu" title="Link to this heading"></a></h1>
+<section id="script-cpu-py">
+<h2>script cpu.py<a class="headerlink" href="#script-cpu-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>interval<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: poll interval</p></li>
+<li><p>options : [’–interval’]</p></li>
+<li><p>default : 1</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-nameservers-php">
+<span id="module-python.autodocs.system.nameservers"></span><h2>script nameservers.php<a class="headerlink" href="#script-nameservers-php" title="Link to this heading"></a></h2>
+<p>Retrieves a list of nameservers.</p>
+<dl>
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><ul>
+<li><p>argv[1] : bool</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Optional argument to specify whether to include additional information (default: false)</p></li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><ul>
+<li><p>A JSON-encoded array containing the list of nameservers.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<section id="script-remote-backup-php">
+<span id="module-python.autodocs.system.remote_backup"></span><h2>script remote_backup.php<a class="headerlink" href="#script-remote-backup-php" title="Link to this heading"></a></h2>
+<p>This script uses the BackupFactory class to manage backup providers.</p>
+<p>The script assumes that the backup providers are configured correctly and that the necessary dependencies are .
+This script is designed to be run remotely and can be used to perform backups at random intervals.</p>
+<dl class="simple">
+<dt><em>Arguments</em> </dt><dd><ul class="simple">
+<li><p>$random_delay (optional): A random delay in seconds to add before starting the backup</p></li>
+</ul>
+</dd>
+<dt><em>Functions</em> </dt><dd><ul class="simple">
+<li><p>BackupFactory::listProviders(): Returns a list of backup providers</p></li>
+<li><p>BackupProvider::isEnabled(): Checks if a backup provider is enabled</p></li>
+<li><p>BackupProvider::backup(): Performs a backup using a provider</p></li>
+</ul>
+</dd>
+<dt><em>Flow</em></dt><dd><ul class="simple">
+<li><p>Adds a random delay in seconds before starting the backup (if specified)</p></li>
+<li><p>Creates a BackupFactory instance</p></li>
+<li><p>Iterates over the list of backup providers</p></li>
+<li><p>Checks if each provider is enabled and performs a backup if it is</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-ssl-ciphers-py">
+<span id="module-python.autodocs.system.ssl_ciphers"></span><h2>script ssl_ciphers.py<a class="headerlink" href="#script-ssl-ciphers-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>format<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: format</p></li>
+<li><p>options : [’–format’]</p></li>
+<li><p>default : full</p></li>
+<li><p>choices : [‘full’, ‘key_value’]</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>filter<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: filter version</p></li>
+<li><p>options : [’–filter’]</p></li>
+<li><p>choices : [‘TLSv1.3’, ‘pre-TLSv1.3’, ‘’]</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-status-php">
+<span id="module-python.autodocs.system.status"></span><h2>script status.php<a class="headerlink" href="#script-status-php" title="Link to this heading"></a></h2>
+<p>This script uses the OPNsenseSystemSystemStatus class to retrieve the system status.</p>
+<p>If an action is specified (dismiss), the script will dismiss the corresponding status.
+If no action is specified, the script will display the system status in JSON format.</p>
+<dl>
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><p>argsv[0] : str</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The action to perform on the system status (dismiss).</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><em>Returns</em> </dt><dd><ul class="simple">
+<li><p>string</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>The system status in JSON format if no action is specified.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+<section id="script-sysctl-py">
+<span id="module-python.autodocs.system.sysctl"></span><h2>script sysctl.py<a class="headerlink" href="#script-sysctl-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>values<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: comma-separated list of sysctl values to fetch</p></li>
+<li><p>options : [’–values’]</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-temperature-sh">
+<span id="module-python.autodocs.system.temperature"></span><h2>script temperature.sh<a class="headerlink" href="#script-temperature-sh" title="Link to this heading"></a></h2>
+<p>Displays the temperature readings from the system.</p>
+<p>It uses the <cite>sysctl</cite> command to retrieve the temperature-related sysctls and then sorts the output.</p>
+<dl class="simple">
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary command (<cite>sysctl</cite>) is available.</p></li>
+<li><p>Thescript only displays temperature readings if they are available on the system.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-python.autodocs.unbound.cache">
+<span id="unbound"></span><h1>unbound<a class="headerlink" href="#module-python.autodocs.unbound.cache" title="Link to this heading"></a></h1>
+<section id="script-cache-sh">
+<h2>script cache.sh<a class="headerlink" href="#script-cache-sh" title="Link to this heading"></a></h2>
+<p>Executes the main functionality of the program.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>Path to the configuration file.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p><em>Arguments</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>verbose<span class="classifier">bool</span></dt><dd><p>Enable verbose mode for detailed output.
+default= False</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>debug<span class="classifier">bool</span></dt><dd><p>Enable debug mode for troubleshooting.
+default= False</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p><em>Returns</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>int</dt><dd><p>Exit status of thescript (0 for success, non-zero for failure)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-logger-py">
+<span id="module-python.autodocs.unbound.logger"></span><h2>script logger.py<a class="headerlink" href="#script-logger-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>pipe<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: named pipe file location</p></li>
+<li><p>options : [’–pipe’]</p></li>
+<li><p>default : /var/unbound/data/dns_logger</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>targetdb<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: duckdb filename</p></li>
+<li><p>options : [’–targetdb’]</p></li>
+<li><p>default : /var/unbound/data/unbound.duckdb</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>backup_dir<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: backup directory</p></li>
+<li><p>options : [’–backup_dir’]</p></li>
+<li><p>default : /var/cache/unbound.duckdb</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flush_interval<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: interval to flush to db</p></li>
+<li><p>options : [’–flush_interval’]</p></li>
+<li><p>default : 10</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-restore-db-py">
+<span id="module-python.autodocs.unbound.restore_db"></span><h2>script restore_db.py<a class="headerlink" href="#script-restore-db-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>backup_dir<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: backup directory</p></li>
+<li><p>options : [’–backup_dir’]</p></li>
+<li><p>default : /var/cache/unbound.duckdb</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>targetdb<span class="classifier">str</span></dt><dd><ul>
+<li><p>Description: duckdb filename</p></li>
+<li><p>options : [’–targetdb’]</p></li>
+<li><p>default : /var/unbound/data/unbound.duckdb</p></li>
+<li><p>required : False</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="script-start-sh">
+<span id="module-python.autodocs.unbound.start"></span><h2>script start.sh<a class="headerlink" href="#script-start-sh" title="Link to this heading"></a></h2>
+<p>Starts the Unbound DNS resolver and configures it for use with OPNsense.</p>
+<p>It removes any existing configuration files, checks for the presence of the root.key file, and runs unbound-anchor if necessary.
+Thescript then copies configuration files from /usr/local/etc/unbound.opnsense.d to /var/unbound/etc and sets the ownership of the files to the unbound user.
+Finally, thescript starts the Unbound service and loads the DNS cache.</p>
+<dl class="simple">
+<dt><em>Params</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>${1}<span class="classifier">str</span></dt><dd><ul>
+<li><p>DOMAIN: The domain name to use for DHCP and DNS configuration.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt><em>Notes</em></dt><dd><ul class="simple">
+<li><p>Thisscript assumes that the necessary commands (<cite>unbound</cite>, <cite>unbound-anchor</cite>, <cite>unbound-control-setup</cite>, <cite>chown</cite>, <cite>daemon</cite>) are available.</p></li>
+<li><p>Thescript uses the <cite>/usr/local/opnsense/scripts/unbound</cite> directory for Unbound-relatedscripts and configuration files.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="script-stats-py">
+<span id="module-python.autodocs.unbound.stats"></span><h2>script stats.py<a class="headerlink" href="#script-stats-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<p>None</p>
+</section>
+<section id="script-wrapper-py">
+<span id="module-python.autodocs.unbound.wrapper"></span><h2>script wrapper.py<a class="headerlink" href="#script-wrapper-py" title="Link to this heading"></a></h2>
+<p><em>Parameters</em></p>
+<p>None</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="wireguard">
+<h1>Wireguard<a class="headerlink" href="#wireguard" title="Link to this heading"></a></h1>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="python_package.html" class="btn btn-neutral float-left" title="Opnsense-Helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, ji-podhead.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

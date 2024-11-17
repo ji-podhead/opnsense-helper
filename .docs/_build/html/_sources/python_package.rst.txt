@@ -15,6 +15,15 @@ Config_Manager class lets you assign configurations, by passing arrays of the co
 Config_Manager will  parse those objects to xml and automatically reconfigure your devices.
 
 .. automodule:: opnsense_helper.config_manager.config_manager
+    
+==========================================
+Api Docs for Opnsense_Helper pip package.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: opnsense_helper
+  
+   opnsense_helper.rst
     :members:
     :undoc-members:
     :show-inheritance:

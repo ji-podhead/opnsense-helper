@@ -6,7 +6,7 @@ scripts_folder="/usr/local/opnsense/scripts/"
 class Scripts():
      """
      class Scripts
-     ------------
+     -----------------------------
 
      Initialize the Scripts class.
      * its just a wrapper for all the opnsense scripts classes. see attributes below.
@@ -70,7 +70,7 @@ class Scripts():
 class unbound(Exec_Class):
      """
      class unbound
-     ----------
+     -----------------------------
 
      * Initializes the unbound class, inheriting from Exec_Class. 
     
@@ -122,7 +122,7 @@ class unbound(Exec_Class):
 class system(Exec_Class):
      """
      class system
-     ----------
+     -----------------------------
 
      Initializes the system class, inheriting from Exec_Class.
 
@@ -178,7 +178,7 @@ class system(Exec_Class):
 class syslog(Exec_Class):
      """
      class syslog
-     ----------
+     -----------------------------
 
      Initializes the syslog class, inheriting from Exec_Class.
 
@@ -227,7 +227,7 @@ class syslog(Exec_Class):
 class suricata(Exec_Class):
      """
      class suricata
-     -------------
+     -------------------------------------------------
      
      Initializes the suricata class, inheriting from Exec_Class.
     
@@ -338,7 +338,7 @@ class shell(Exec_Class):
 class shaper(Exec_Class):
      """
      class Shaper
-     ------------
+     -----------------------------
 
      Initializes the shaper class, inheriting from Exec_Class.
     
@@ -378,7 +378,7 @@ class shaper(Exec_Class):
 class routes(Exec_Class):
      """
      class routes
-     ------------
+     -----------------------------
 
      Initializes the routes class, inheriting from Exec_Class.
 
@@ -422,7 +422,7 @@ class routes(Exec_Class):
 class openvpn(Exec_Class):
      """
      class openvpn
-     ------------
+     -----------------------------
      
      Initializes the openvpn class, inheriting from Exec_Class.
 
@@ -473,7 +473,7 @@ class openvpn(Exec_Class):
 class openssh(Exec_Class):
      """
      class openssh
-     -------------
+     ------------------------------
      
      Initializes the openssh class, inheriting from Exec_Class.
 
@@ -510,7 +510,7 @@ class openssh(Exec_Class):
 class netflow(Exec_Class):
      """
      class netflow
-     -------------
+     ------------------------------
 
      Initialize the netflow class, inheriting from Exec_Class.
 
@@ -560,7 +560,7 @@ class netflow(Exec_Class):
 class ipsec(Exec_Class):
      """
      class ipsec
-     -------------
+     ------------------------------
      
      Initializes the ipsec class, inheriting from Exec_Class.
 
@@ -614,7 +614,7 @@ class ipsec(Exec_Class):
 class interfaces(Exec_Class):
      """
      class interfaces
-     ----------------
+     ---------------------------------
 
      Initializes the interfaces class, inheriting from Exec_Class.
     
@@ -698,7 +698,7 @@ class interfaces(Exec_Class):
 class health(Exec_Class):
      """
      class heatlh
-     .............
+     -----------------
      
      Initializes the health class, inheriting from Exec_Class.
 
@@ -738,7 +738,7 @@ class health(Exec_Class):
 class firmware(Exec_Class):
      """
      clas firmware 
-     .............
+     ---------------
      
      Initializes the firmware class, inheriting from Exec_Class.
 
@@ -822,7 +822,7 @@ class firmware(Exec_Class):
 class filter(Exec_Class):
      """
      class filter
-     .............
+     --------------
      Initializes the filter class, inheriting from Exec_Class.
      
      **Usage**
@@ -897,7 +897,7 @@ class filter(Exec_Class):
 class dns(Exec_Class):
      """
      class dns
-     ........
+     ------------
      
      Initializes the dns class, inheriting from Exec_Class.
 
@@ -932,7 +932,7 @@ class dns(Exec_Class):
 class dhcp(Exec_Class):
      """
      class dhcp
-     ........
+     -----------
      
      Initializes the dhcp class, inheriting from Exec_Class.
 
@@ -982,7 +982,7 @@ class dhcp(Exec_Class):
 class auth(Exec_Class):
      """
      class  auth
-     ------
+     ---------------
      
      Initializes the auth class, inheriting from Exec_Class.
 
@@ -1020,7 +1020,7 @@ class auth(Exec_Class):
 class Wireguard(Exec_Class):
      """
      class Wireguard
-     ------
+     -----------------
 
      Initializes the Wireguard class, inheriting from Exec_Class.
 
